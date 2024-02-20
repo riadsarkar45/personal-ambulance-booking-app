@@ -16,6 +16,10 @@ export const router = createBrowserRouter([
             {
                 path: "/see-detail/:id",
                 element: <AmbulanceDetails />
+            },
+            {
+                path: "/medic-guide",
+                element: "medic guide"
             }
         ]
 

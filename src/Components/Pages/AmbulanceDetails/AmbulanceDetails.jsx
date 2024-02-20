@@ -76,7 +76,7 @@ const AmbulanceDetails = () => {
             .then(res => console.log(res.data), refetch())
     }
     return (
-        <div className="font-serif bg-black bg-opacity-10 w-full">
+        <div className="font-serif dark:bg-gray-800 text-gray-900 w-full">
             {
                 loading ? (
                     <Box sx={{ width: '100%' }}>

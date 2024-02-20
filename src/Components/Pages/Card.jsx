@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Card = ({ card }) => {
     const { img, hospitalName, ambulanceNumber, driverName, _id, type, price, completedTour, lastTourDate, location } = card
     return (
-        <div className="bg-[#ede7e1] mt-3 bg-opacity-60 shadow-md font-serif lg:h-[15rem] lg:flex p-2 gap-3">
+        <div className=" text-white bg-white mt-3 bg-opacity-20 rounded-md shadow-md font-serif lg:h-[15rem] lg:flex p-2 gap-3">
             <div className=" h-[14rem] lg:w-[22rem] p-2 rounded-md">
                 <img className='lg:w-full w-full h-full' src={img} alt="ambulance" />
             </div>

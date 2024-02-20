@@ -29,12 +29,32 @@ const AmbulanceDetail = ({ filteredData, handleBookingAmbulance, handleShowComme
     const { ambulanceNumber, completedTour, driverName, hospitalName, img, lastTourDate, location, price, rating, type } = filteredData;
     return (
         <div className=''>
-            <div className='flex justify-between mt-4 gap-2'>
+            <div className='flex justify-between mt-4 gap-2 dark:text-gray-400'>
                 <div className=' p-2 flex justify-between w-[42rem] gap-2 h-[50vh]'>
                     <div>
                         <img className='w-[20rem]' src={img} alt="" />
 
-                        <div className='flex gap-2'>
+
+                    </div>
+
+
+                    <div className='dark:text-gray-400'>
+
+                        <div className='text-sm'>
+                            <p className='text-xl dark:text-gray-400'>Hospital Name: {hospitalName}</p>
+                            <p>Driver Name: {driverName}</p>
+                            <p>Location: {location}</p>
+                            <p>Completed Tour: {completedTour}</p>
+                            <p>Last Tour: {lastTourDate}</p>
+                            <p>Id: {ambulanceNumber}</p>
+                            <p>Type: {type}</p>
+                            <p>Rating: {rating}</p>
+                            <p>Price: {price}</p>
+                            
+
+
+                        </div>
+                        <div className='flex gap-2 h-[3rem] w-full'>
                             <div className='w-full text-center mt-2 border-gray-500 p-2  border rounded-md'>
                                 <button onClick={handleBookingAmbulance} >Book Now</button>
                             </div>
@@ -42,21 +62,6 @@ const AmbulanceDetail = ({ filteredData, handleBookingAmbulance, handleShowComme
                                 <button onClick={handleShowComments} >Reviews</button>
                             </div>
                         </div>
-                    </div>
-                    <div className='text-sm'>
-                        <p className='text-xl'>Hospital Name: {hospitalName}</p>
-                        <ul className=''>
-
-                            <li>Driver Name: {driverName}</li>
-                            <li>Location: {location}</li>
-                            <li>Completed Tour: {completedTour}</li>
-                            <li>Last Tour: {lastTourDate}</li>
-                            <li>Id: {ambulanceNumber}</li>
-                            <li>Type: {type}</li>
-                            <li>Rating: {rating}</li>
-                            <li>Price: {price}</li>
-
-                        </ul>
 
 
                     </div>

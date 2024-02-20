@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -24,7 +24,7 @@ function HeaderSidebar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-
+  const location = useLocation();
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -42,33 +42,22 @@ function HeaderSidebar(props) {
 
   const drawer = (
     <div className='bg-[#ede7e1] h-full'>
-      <Toolbar />
-      <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <div className="bg-gray-800 h-screen">
+        <div className="p-4">
+          <h1 className="text-white text-xl font-semibold">Sidenav</h1>
+          <ul className="mt-4 ">
+            <NavLink exact to="/" activeClassName="bg-red-500">
+              <li className={`py-2 ${location.pathname === '/' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>Home</li>
+            </NavLink>
+
+            <NavLink exact to="/medic-guide" activeClassName="bg-red-500">
+              <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Medical Guidance</li>
+            </NavLink>
+          </ul>
+        </div>
+      </div>
+
+
     </div>
   );
 

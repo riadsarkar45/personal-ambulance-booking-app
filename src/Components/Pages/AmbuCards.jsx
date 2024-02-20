@@ -44,7 +44,7 @@ const AmbuCards = () => {
 
 
     return (
-        <div className='font-serif'>
+        <div className='font-serif  dark:bg-gray-800 text-gray-900 p-3'>
             <div>
                 {/* visible only on lg and md devices */}
                 <div className='md:block hidden'>
@@ -64,9 +64,6 @@ const AmbuCards = () => {
                                 <option value="AC">AC</option>
                                 <option value="Non AC">Non AC</option>
                             </select>
-                        </div>
-                        <div>
-                            <button className='border border-gray-500 p-2 mt-1'>Total: {isSearched ? `${searchedData.length}` : `${data.length}`}</button>
                         </div>
                     </div>
                 </div>
