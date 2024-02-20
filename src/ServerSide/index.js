@@ -35,7 +35,7 @@ async function run() {
         const database = client.db('ambulance-booking-app')
         const ambulanceDetails = database.collection("ambulance-details")
         const comments = database.collection("comments")
-        const commentReply = database.collection("commentReplies")
+        const doctorsLists = database.collection('doctors-lists')
 
         app.get('/all-users', async (req, res) => {
             const result = await ambulanceDetails.find().toArray();
@@ -155,7 +155,10 @@ async function run() {
             }
         });
 
-
+        app.get('/api/get/all/doctors', async (req, res) => {
+            const result = await doctorsLists.find().toArray();
+            res.send(result)
+        })
 
 
 
