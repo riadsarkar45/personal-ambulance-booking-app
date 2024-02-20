@@ -53,6 +53,10 @@ function HeaderSidebar(props) {
             <NavLink exact to="/medic-guide" activeClassName="bg-red-500">
               <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Medical Guidance</li>
             </NavLink>
+
+            <NavLink exact to="/chat-room" activeClassName="bg-red-500">
+              <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Chat Room</li>
+            </NavLink>
           </ul>
         </div>
       </div>
