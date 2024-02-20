@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 const drawerWidth = 240;
 
@@ -133,6 +134,7 @@ function HeaderSidebar(props) {
       >
         <Toolbar />
         <Outlet></Outlet>
+        <Toaster></Toaster>
       </Box>
     </Box>
   );
