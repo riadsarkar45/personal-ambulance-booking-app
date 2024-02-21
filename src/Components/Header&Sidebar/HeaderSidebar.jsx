@@ -18,10 +18,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
+import useAdmin from '../../Hooks/useAdmin';
 const drawerWidth = 240;
 
 function HeaderSidebar(props) {
+  const [isAdmin] = useAdmin()
+  console.log(isAdmin)
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -55,8 +57,30 @@ function HeaderSidebar(props) {
               <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Medical Guidance</li>
             </NavLink>
 
+            <NavLink exact to="/medicines" activeClassName="bg-red-500">
+              <li className={`py-2 ${location.pathname === '/medicines' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Medicines</li>
+            </NavLink>
+
             <NavLink exact to="/chat-room" activeClassName="bg-red-500">
-              <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Chat Room</li>
+              <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Arrange A Meeting</li>
+            </NavLink>
+          </ul>
+        </div>
+
+        <div className='border-2 border-gray-500'></div>
+
+        <div className="p-4">
+          <ul className="mt-1 ">
+            <NavLink exact to="/my-requests" activeClassName="bg-red-500">
+              <li className={`py-2 ${location.pathname === '/my-requests' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>My Requests</li>
+            </NavLink>
+
+            <NavLink exact to="/medic-guide" activeClassName="bg-red-500">
+              <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>My Favorites</li>
+            </NavLink>
+
+            <NavLink exact to="/medicines" activeClassName="bg-red-500">
+              <li className={`py-2 ${location.pathname === '/medicines' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>My Cart</li>
             </NavLink>
           </ul>
         </div>

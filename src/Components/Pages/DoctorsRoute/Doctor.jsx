@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Auth/AuthProvider/AuthProvider';
 
-const Doctor = ({ doc }) => {
-    const { name, qualification, hospital, image, expertise, status } = doc;
-    console.log(name);
+const Doctor = ({ doc, handleRequestDoctor }) => {
+    const { name, qualification, hospital, image, expertise, status, _id } = doc;
+    const { user } = useContext(AuthContext)
     return (
         <div>
             <Link>
@@ -18,7 +20,10 @@ const Doctor = ({ doc }) => {
                         <h2>{expertise}</h2>
                         {
                             status === "Available" ? (
-                                <div className='bg-green-500 text-center p-1 bg-opacity-35 border border-green-500'><h2>Available</h2></div>
+                                <div className='flex justify-between gap-1' >
+                                    <button className='bg-green-500 w-full text-center p-1 rounded-sm bg-opacity-35 border border-green-500'>Available</button>
+                                    <button onClick={() => handleRequestDoctor(name, _id, user?.displayName, user?.email)} className='bg-blue-500 w-full text-center p-1 rounded-sm bg-opacity-35 border border-blue-500'>Request</button>
+                                </div>
                             ) : <div className='bg-red-500 text-center p-1 bg-opacity-35 border border-red-500'><h2>Not Available</h2></div>
                         }
                     </div>
@@ -30,6 +35,7 @@ const Doctor = ({ doc }) => {
 
 Doctor.propTypes = {
     doc: PropTypes.object,
+    handleRequestDoctor: PropTypes.func,
 };
 
 export default Doctor;

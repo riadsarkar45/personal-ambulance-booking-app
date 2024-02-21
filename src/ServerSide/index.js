@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const bodyParser = require('body-parser');
-
+const jwt = require('jsonwebtoken');
+const ACCESS_TOKEN = "fac12e4511a93e01afa0d1b8ecee72c2fee63b28524fcf83b37cee2bdb0ab9475f4b6d292c6745c7510dbb45a33f3eaba4ae7b446ab337e66e6b0cd16c8c72fb"
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 5000;
@@ -36,6 +37,65 @@ async function run() {
         const ambulanceDetails = database.collection("ambulance-details")
         const comments = database.collection("comments")
         const doctorsLists = database.collection('doctors-lists')
+        const patientRequest = database.collection("patient-request")
+        const users = database.collection("users")
+        const verifyToken = (req, res, next) => {
+            // console.log('inside verify token', req.headers.authorization);
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: 'unauthorized access' });
+            }
+            const token = req.headers.authorization.split(' ')[1];
+            jwt.verify(token, ACCESS_TOKEN, (err, decoded) => {
+                if (err) {
+                    return res.status(401).send({ message: 'unauthorized access' })
+                }
+                req.decoded = decoded;
+                next();
+            })
+        }
+
+        app.get('/users/admin/:email', verifyToken, async (req, res) => {
+            const email = req.params.email;
+
+            if (email !== req.decoded.email) {
+                return res.status(403).send({ message: 'forbidden access' })
+            }
+
+            const query = { email: email };
+            const user = await users.findOne(query);
+            let admin = false;
+            let doctor = false;
+            if (user) {
+                admin = user?.role === 'admin';
+                doctor = user?.role === 'doctor'
+            }
+            res.send({ admin, doctor });
+        })
+
+        const getUserRole = async (req, res, next) => {
+            const email = req.decoded.email;
+            const query = { email: email };
+            const user = await users.findOne(query);
+
+            if (user) {
+                req.userRole = user.role;
+                next();
+            } else {
+                res.status(403).send({ message: 'Forbidden access' });
+            }
+        };
+
+        const verifyUserRole = async (req, res, next) => {
+            const email = req.decoded.email;
+            const query = { email: email };
+            const user = await users.findOne(query);
+            const isAdmin = user?.role === 'admin';
+            const pUser = user?.role === 'pUser'
+            if (!isAdmin) {
+                return res.status(403).send({ message: 'forbidden access' });
+            }
+            next();
+        }
 
         app.get('/all-users', async (req, res) => {
             const result = await ambulanceDetails.find().toArray();
@@ -120,7 +180,7 @@ async function run() {
 
         })
 
-        app.post('/api/submit/comments', async (req, res) => {
+        app.post('/api/submit/comments', verifyToken, getUserRole, async (req, res) => {
             try {
                 const { text, commentType, replyId, postId } = req.body;
 
@@ -155,9 +215,30 @@ async function run() {
             }
         });
 
-        app.get('/api/get/all/doctors', async (req, res) => {
+        app.get('/api/get/all/doctors', verifyToken, getUserRole, verifyUserRole, async (req, res) => {
             const result = await doctorsLists.find().toArray();
             res.send(result)
+        })
+
+        app.post('/api/create/new/request/to/doctor', verifyToken, getUserRole, async (req, res) => {
+            const dataToInsert = req.body;
+            const insert = await patientRequest.insertOne(dataToInsert);
+            res.send(insert)
+        })
+
+        app.get('/api/get/my-request/:email', async (req, res) => {
+            const params = req.params.email;
+            const patientReq = await patientRequest.find().toArray()
+            const patientsReq = patientReq.filter(reqEmail => reqEmail.requesterEmail === params)
+            res.send(patientsReq)
+        })
+
+
+        app.post('/jwt', async (req, res) => {
+            const user = req.body;
+            const token = jwt.sign(user, ACCESS_TOKEN, { expiresIn: '1h' });
+
+            res.send({ token })
         })
 
 
