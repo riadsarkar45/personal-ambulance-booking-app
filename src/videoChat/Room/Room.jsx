@@ -12,7 +12,7 @@ const Room = () => {
             sharedLinks: [
                 {
                     name: 'Copy Link',
-                    url: `https://mute-week.surge.sh/room/${roomId}`
+                    url: `http://localhost:5173/room/${roomId}`
                 }
             ],
             scenario: {

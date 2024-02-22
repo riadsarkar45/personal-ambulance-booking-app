@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const ACCESS_TOKEN = "fac12e4511a93e01afa0d1b8ecee72c2fee63b28524fcf83b37cee2bdb0ab9475f4b6d292c6745c7510dbb45a33f3eaba4ae7b446ab337e66e6b0cd16c8c72fb"
+const nodemailer = require('nodemailer');
+const ACCESS_TOKEN = "your access token"
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 5000;
@@ -39,6 +41,16 @@ async function run() {
         const doctorsLists = database.collection('doctors-lists')
         const patientRequest = database.collection("patient-request")
         const users = database.collection("users")
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'yourgmail.com',
+                pass: 'your app password'
+            }
+        });
+
+
         const verifyToken = (req, res, next) => {
             // console.log('inside verify token', req.headers.authorization);
             if (!req.headers.authorization) {
@@ -90,7 +102,6 @@ async function run() {
             const query = { email: email };
             const user = await users.findOne(query);
             const isAdmin = user?.role === 'admin';
-            const pUser = user?.role === 'pUser'
             if (!isAdmin) {
                 return res.status(403).send({ message: 'forbidden access' });
             }
@@ -180,45 +191,86 @@ async function run() {
 
         })
 
-        app.post('/api/submit/comments', verifyToken, getUserRole, async (req, res) => {
+
+
+        app.get('/api/get/all/doctors/:email', verifyToken, async (req, res) => {
+            const email = req.params.email
+            const result = await doctorsLists.find().toArray();
+            const patientReq = await patientRequest.find().toArray();
+            const filter = patientReq?.filter(reqs => reqs.requesterEmail === email)
+            const requesterEmails = filter?.map(ids => ids.requestToId.toString())
+
+            res.send({ result, requesterEmails })
+        })
+
+        app.get('/api/doctor/request/:doctorEmail', async (req, res) => {
+            const doctorEmail = req.params.doctorEmail;
+            const reqCollection = await patientRequest.find().toArray();
+            const userEmail = reqCollection?.filter(email => email.email === doctorEmail)
+            res.send(userEmail)
+        })
+
+        app.put('/api/update/request/status', async (req, res) => {
             try {
-                const { text, commentType, replyId, postId } = req.body;
-
-                if (commentType === "reply") {
-                    // Find the parent comment by its ID
-                    const parentComment = await comments.findOne({ _id: replyId });
-                    if (!parentComment) {
-                        return res.status(404).json({ message: "Parent comment not found" });
+                const dataToUpdate = req.body;
+                const id = dataToUpdate.id
+                console.log(id)
+                const filter = { _id: new ObjectId(id) };
+                const updateStatus = {
+                    $set: {
+                        status: dataToUpdate.status,
                     }
+                };
+        
+                const update = await patientRequest.updateOne(filter, updateStatus);
+        
+                res.send(update);
 
-                    // Create the new reply object
-                    const reply = {
-                        _id: new ObjectId(),
-                        text,
-                        postId,
-                        replies: [] // Initialize empty replies array for the reply
-                    };
-
-                    // Add the new reply to the parent comment's replies array
-                    parentComment.replies.push(reply);
-
-                    // Update the parent comment in the database
-                    await comments.updateOne({ _id: parentComment._id }, { $set: { replies: parentComment.replies } });
-
-                    return res.status(201).json(reply);
-                } else {
-                    // Handle regular comment submission
-                }
+                const mailOptions = {
+                    from: 'yourgmail.com',
+                    to: `${dataToUpdate.confirmationEmailReceiver}`,
+                    subject: 'Your requested accepted',
+                    html: `
+                    
+                    <body style="font-family: Arial, sans-serif; line-height: 1.6; background-color: #f2f2f2; margin: 0; padding: 0;">
+    
+                        <div class="container" style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                            <header>
+                                <h1 style="color: #333; font-size: 24px; margin-bottom: 10px;"><a href="#" style="color: #007bff; text-decoration: none;">Ambulance Booking App</a></h1>
+                            </header>
+                            <main>
+                                <h2 style="color: #333; font-size: 20px; margin-bottom: 15px;">Hi ${dataToUpdate.requesterName},</h2>
+                                <p style="color: #666; font-size: 16px; margin-bottom: 15px;">Your request was accepted</p>
+                                <p style="color: #666; font-size: 16px; margin-bottom: 15px;">Your meeting scheduled in ${dataToUpdate.meetingDate} ${dataToUpdate.meetingTime}</p>
+                                <button style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
+                                    <a href=${dataToUpdate.meetLink} style="color: #fff; text-decoration: none;">Start Meeting</a>
+                                </button>
+                            </main>
+                            <footer class="footer" style="margin-top: 20px; font-size: 14px; color: #666;">
+                                <p>Thanks,<br>Ambulance booking app team</p>
+                            </footer>
+                        </div>
+                    </body>
+                    `
+                };
+    
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.error('Error sending email:', error);
+                        res.status(500).send('Error sending email');
+                    } else {
+                        console.log('Email sent:', info.response);
+                        res.status(200).send('Email sent');
+                    }
+                });
             } catch (error) {
-                console.error("Error submitting comment:", error);
-                return res.status(500).json({ message: "Internal server error" });
+                console.error('Error updating request status:', error);
+                res.status(500).send('Error updating request status');
             }
         });
+        
 
-        app.get('/api/get/all/doctors', verifyToken, getUserRole, verifyUserRole, async (req, res) => {
-            const result = await doctorsLists.find().toArray();
-            res.send(result)
-        })
+        
 
         app.post('/api/create/new/request/to/doctor', verifyToken, getUserRole, async (req, res) => {
             const dataToInsert = req.body;

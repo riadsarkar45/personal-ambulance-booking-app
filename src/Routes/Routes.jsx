@@ -7,6 +7,7 @@ import Doctors from "../Components/Pages/DoctorsRoute/Doctors"
 import GetRoomId from "../videoChat/Home/GetRoomId"
 import Room from "../videoChat/Room/Room"
 import MyRequest from "../Components/Pages/myRequests/MyRequest"
+import DoctorRequests from "../Components/Pages/DoctorRequest/DoctorRequests"
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: "/my-requests",
                 element: <MyRequest />
+            },
+            {
+                path: "/requests",
+                element: <DoctorRequests></DoctorRequests>
             }
         ]
 

@@ -19,6 +19,9 @@ const MyRequest = () => {
     });
     return (
         <div>
+            <div className="bg-white h-[4rem] bg-opacity-20 rounded-sm text-white flex items-center p-2 text-2xl mb-5">
+                <h2>My Requests </h2>
+            </div>
             {
                 myRequest?.map((myReq, i) => <Request key={i} i={i} myReq={myReq}></Request>)
             }

@@ -1,20 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../Hooks/BaseUrl/useAxiosPublic";
 import Doctor from "./Doctor";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure"
+import { useContext } from "react";
+import { AuthContext } from "../../../Auth/AuthProvider/AuthProvider";
 const Doctors = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: doctors = [] } = useQuery({
+    const {user} = useContext(AuthContext)
+    
+    const { data: doctors = [], refetch } = useQuery({
         queryKey: ["doctors"],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/api/get/all/doctors`);
+            if (!user) return;
+            const res = await axiosSecure.get(`/api/get/all/doctors/${user?.email}`);
             return res.data;
         },
+        enabled: !!user,
     });
 
+
     const handleRequestDoctor = (requestTo, requestToId, requesterName, requesterEmail) => {
-        console.log("requestTo", requestTo, "requesterName", requesterName);
         const dataToInsert = {
             requestTo,  // request receiver name
             requestToId, // request receiver name
@@ -22,7 +27,7 @@ const Doctors = () => {
             requesterEmail // request sender email
         }
         axiosSecure.post('/api/create/new/request/to/doctor', dataToInsert)
-        .then(res => console.log(res.data), toast.success("Request Sent"))
+        .then(() => toast.success("Request Sent"), refetch())
     }
 
     return (
@@ -32,7 +37,7 @@ const Doctors = () => {
             </div>
             <div className="grid grid-cols-4 mt-9">
                 {
-                    doctors?.map((doc, i) => <Doctor handleRequestDoctor={handleRequestDoctor} key={i} doc={doc}></Doctor>)
+                    doctors?.result?.map((doc, i) => <Doctor requesterEmails={doctors?.requesterEmails} handleRequestDoctor={handleRequestDoctor} key={i} doc={doc}></Doctor>)
                 }
             </div>
         </div>
