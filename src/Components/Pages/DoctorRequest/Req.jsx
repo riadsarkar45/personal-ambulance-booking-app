@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -17,6 +15,8 @@ const style = {
 const Req = ({ req, index, handleOpen, handleClose, open, meetLink, createUniqIdWithLink, confirmRequest, getDate, getTime }) => {
     const { requesterName, _id, requesterEmail, status } = req;
 
+
+    
     return (
         <div className='mt-2'>
             <div className='h-[4rem] justify-between bg-white bg-opacity-20 rounded-sm flex items-center p-2 text-white text-2xl'>
@@ -54,8 +54,6 @@ const Req = ({ req, index, handleOpen, handleClose, open, meetLink, createUniqId
                     </Box>
                 </Modal>
             </div>
-
-
 
 
         </div>

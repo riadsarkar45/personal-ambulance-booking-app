@@ -8,6 +8,14 @@ import GetRoomId from "../videoChat/Home/GetRoomId"
 import Room from "../videoChat/Room/Room"
 import MyRequest from "../Components/Pages/myRequests/MyRequest"
 import DoctorRequests from "../Components/Pages/DoctorRequest/DoctorRequests"
+import Visits from "../Components/Pages/totalVisits/Visits"
+import AddNewDoc from "../Components/Pages/adminRoutes/AddNewDoc"
+import MyBookings from "../Components/Pages/MyBookings"
+import AddNewDriver from "../Components/Pages/AddNewDriver"
+import AllUsers from "../Components/Pages/AllUsers"
+import AllAmbulance from "../Components/Pages/AllAmbulance"
+import AdminRoute from "../Hooks/AdminRoute"
+import PrivateRoute from "../Hooks/PrivateRoute"
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -19,15 +27,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/see-detail/:id",
-                element: <AmbulanceDetails />
+                element: <PrivateRoute><AmbulanceDetails /></PrivateRoute>
             },
             {
                 path: "/medic-guide",
-                element: <Doctors />
+                element: <PrivateRoute><Doctors /></PrivateRoute>
             },
             {
                 path: "/chat-room",
-                element: <GetRoomId></GetRoomId>
+                element: <PrivateRoute><GetRoomId></GetRoomId></PrivateRoute>
             },
             {
                 path: "/room/:roomId",
@@ -35,11 +43,35 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/my-requests",
-                element: <MyRequest />
+                element: <PrivateRoute><MyRequest /></PrivateRoute>
             },
             {
                 path: "/requests",
-                element: <DoctorRequests></DoctorRequests>
+                element: <PrivateRoute><DoctorRequests></DoctorRequests></PrivateRoute>
+            },
+            {
+                path: "/total-visits",
+                element: <PrivateRoute><AdminRoute><Visits /></AdminRoute></PrivateRoute>
+            },
+            {
+                path: "/add-new-doc",
+                element: <PrivateRoute><AdminRoute><AddNewDoc></AddNewDoc></AdminRoute></PrivateRoute>
+            },
+            {
+                path: "/my-Bookings",
+                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+            },
+            {
+                path: "/add-new-ambulance",
+                element: <PrivateRoute><AddNewDriver></AddNewDriver></PrivateRoute>
+            },
+            {
+                path: "/all-users",
+                element: <PrivateRoute><AllUsers></AllUsers></PrivateRoute>
+            },
+            {
+                path: "/all-ambulance",
+                element: <PrivateRoute><AllAmbulance></AllAmbulance></PrivateRoute>
             }
         ]
 

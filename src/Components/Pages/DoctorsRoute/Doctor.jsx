@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Auth/AuthProvider/AuthProvider';
 
 const Doctor = ({ doc, handleRequestDoctor, requesterEmails }) => {
-    const { name, qualification, hospital, image, expertise, status, _id } = doc;
+    const { name, qualification, hospital, image, expertise, status, _id, email } = doc;
     const { user } = useContext(AuthContext)
     const hasSentRequest = requesterEmails.includes(_id);
     return (
         <div>
             <Link>
-                <div className="bg-white text-white bg-opacity-20 h-[25rem] rounded-sm w-[15rem] mt-2 p-2">
+                <div className="bg-white text-white bg-opacity-20 h-[22rem] rounded-sm w-[15rem] mt-2 p-2">
                     <div className="bg-blue-500 bg-opacity-10 h-[10rem] p-2">
                         <img className='w-full h-full' src={image} alt="" />
                     </div>
@@ -34,7 +34,7 @@ const Doctor = ({ doc, handleRequestDoctor, requesterEmails }) => {
                                 </button>
                             ) : (
                                 <button
-                                    onClick={() => handleRequestDoctor(name, _id, user?.displayName, user?.email)}
+                                    onClick={() => handleRequestDoctor(name, _id, user?.displayName, user?.email, email)}
                                     className='bg-green-500 p-1 bg-opacity-40 rounded-md w-full'
                                 >
                                     Send Request

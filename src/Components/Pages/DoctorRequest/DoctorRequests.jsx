@@ -11,6 +11,7 @@ const DoctorRequests = () => {
     const [meetLink, setMeetLink] = useState('')
     const [meetingDate, setMeetingDate] = useState('')
     const [meetingTime, setMeetingTime] = useState('')
+    const [request, setRequest] = useState([])
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -19,6 +20,7 @@ const DoctorRequests = () => {
         queryFn: async () => {
             if (!user) return;
             const res = await axiosSecure.get(`/api/doctor/request/${user?.email}`);
+            setRequest(res.data)
             return res.data;
         },
         enabled: !!user,
@@ -56,7 +58,7 @@ const DoctorRequests = () => {
             </div>
             <div>
                 {
-                    doctorReq?.map((req, i) =>
+                    request?.map((req, i) =>
                         <Req
                             createUniqIdWithLink={createUniqIdWithLink}
                             confirmRequest={confirmRequest}

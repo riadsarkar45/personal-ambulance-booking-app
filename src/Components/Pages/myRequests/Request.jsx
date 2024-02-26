@@ -15,9 +15,6 @@ const Request = ({ myReq, i }) => {
                 }
             </div>
 
-            <div>
-                On Hold
-            </div>
 
             <div>
                 <button className='bg-red-500 bg-opacity-10 p-1 rounded-md border border-red-500 text-red-500' >Delete</button>
