@@ -16,65 +16,70 @@ import AllUsers from "../Components/Pages/AllUsers"
 import AllAmbulance from "../Components/Pages/AllAmbulance"
 import AdminRoute from "../Hooks/AdminRoute"
 import PrivateRoute from "../Hooks/PrivateRoute"
+import Home from "../LandingPage/Home"
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <HeaderSidebar />,
+        element: <Home></Home>,
+
+    },
+    {
+        path: 'dashboard',
+        element: <HeaderSidebar></HeaderSidebar>,
         children: [
             {
-                path: "/",
-                element: <AmbuCards />
+                path: "/dashboard",
+                element: <AmbuCards></AmbuCards>
             },
             {
-                path: "/see-detail/:id",
+                path: "/dashboard/see-detail/:id",
                 element: <PrivateRoute><AmbulanceDetails /></PrivateRoute>
             },
             {
-                path: "/medic-guide",
+                path: "/dashboard/medic-guide",
                 element: <PrivateRoute><Doctors /></PrivateRoute>
             },
             {
-                path: "/chat-room",
+                path: "/dashboard/chat-room",
                 element: <PrivateRoute><GetRoomId></GetRoomId></PrivateRoute>
             },
             {
-                path: "/room/:roomId",
+                path: "/dashboard/room/:roomId",
                 element: <Room></Room>
             },
             {
-                path: "/my-requests",
+                path: "/dashboard/my-requests",
                 element: <PrivateRoute><MyRequest /></PrivateRoute>
             },
             {
-                path: "/requests",
+                path: "/dashboard/requests",
                 element: <PrivateRoute><DoctorRequests></DoctorRequests></PrivateRoute>
             },
             {
-                path: "/total-visits",
+                path: "/dashboard/total-visits",
                 element: <PrivateRoute><AdminRoute><Visits /></AdminRoute></PrivateRoute>
             },
             {
-                path: "/add-new-doc",
+                path: "/dashboard/add-new-doc",
                 element: <PrivateRoute><AdminRoute><AddNewDoc></AddNewDoc></AdminRoute></PrivateRoute>
             },
             {
-                path: "/my-Bookings",
+                path: "/dashboard/my-Bookings",
                 element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
             },
             {
-                path: "/add-new-ambulance",
+                path: "/dashboard/add-new-ambulance",
                 element: <PrivateRoute><AddNewDriver></AddNewDriver></PrivateRoute>
             },
             {
-                path: "/all-users",
+                path: "/dashboard/all-users",
                 element: <PrivateRoute><AllUsers></AllUsers></PrivateRoute>
             },
             {
-                path: "/all-ambulance",
+                path: "/dashboard/all-ambulance",
                 element: <PrivateRoute><AllAmbulance></AllAmbulance></PrivateRoute>
             }
         ]
-
     },
     {
         path: "/login",

@@ -28,7 +28,7 @@ const DoctorRequests = () => {
 
     const createUniqIdWithLink = () => {
         const uniqLink = uuidv4();
-        setMeetLink(`http://localhost:5173/room/${uniqLink}`)
+        setMeetLink(`ambulance-booking-app.surge.sh/room/${uniqLink}`)
     }
 
     const getDate = (date) => {
@@ -75,11 +75,6 @@ const DoctorRequests = () => {
                     )
                 }
             </div>
-
-
-
-
-
 
         </div>
     );
