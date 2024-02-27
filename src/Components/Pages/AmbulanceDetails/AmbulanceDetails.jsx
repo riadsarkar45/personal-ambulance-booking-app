@@ -5,6 +5,7 @@ import AmbulanceDetail from "./AmbulanceDetail";
 import { useQuery } from "@tanstack/react-query";
 import { Box, LinearProgress } from "@mui/material";
 import { AuthContext } from "../../../Auth/AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 
 
@@ -16,6 +17,8 @@ const AmbulanceDetails = () => {
     const [replyId, setReplyId] = useState('')
     const [repliesComment, setRepliesComment] = useState([])
     const [loading, setLoading] = useState(true)
+    const [location, setLocation] = useState('')
+    const [date, setDate] = useState('')
     const axiosPublic = useAxiosPublic();
     const { id } = useParams();
     const { user } = useContext(AuthContext)
@@ -33,9 +36,24 @@ const AmbulanceDetails = () => {
     });
 
 
+    const handleGetLocation = (location) => {
+        setLocation(location)
+    }
 
-    const handleBookingAmbulance = () => {
+    const handleGetDate = (date) => {
+        setDate(date)
+    }
+
+    const handleBookingAmbulance = (id, bookingReason) => {
         // for booking purpose only
+        const dataToInsert = {
+            id: id,
+            location: location,
+            date: date,
+            bookingReason,
+            bookerEmail: user?.email
+        }
+        axiosPublic.post(`/api/book/ambulance`, dataToInsert).then(()=> toast.success("Ambulance booked"))
     }
 
     const handleShowComments = () => {
@@ -47,7 +65,6 @@ const AmbulanceDetails = () => {
     }
 
     const handleReplyComment = (commentId) => {
-        console.log(commentId)
         setReplyId(commentId)
     }
 
@@ -76,7 +93,7 @@ const AmbulanceDetails = () => {
             .then(res => console.log(res.data), refetch())
     }
     return (
-        <div className="font-serif dark:bg-gray-800 text-gray-900 w-full">
+        <div className="font-serif bg-white bg-opacity-20 text-white w-full">
             {
                 loading ? (
                     <Box sx={{ width: '100%' }}>
@@ -95,6 +112,8 @@ const AmbulanceDetails = () => {
                         replyId={replyId}
                         handleNewComment={handleNewComment}
                         repliesComment={repliesComment}
+                        handleGetLocation={handleGetLocation}
+                        handleGetDate={handleGetDate}
                     />
                 )
             }

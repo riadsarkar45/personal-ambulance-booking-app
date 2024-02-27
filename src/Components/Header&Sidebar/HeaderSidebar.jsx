@@ -3,28 +3,29 @@ import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
-
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import useAdmin from '../../Hooks/useAdmin';
+import { useContext } from 'react';
+import { AuthContext } from '../../Auth/AuthProvider/AuthProvider';
+//import useVisitCounter from '../visiteCounter/useVisitCounter';
 const drawerWidth = 240;
 
 function HeaderSidebar(props) {
+  const [isAdmin] = useAdmin()
+  //useVisitCounter()
+  console.log(isAdmin?.admin)
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logOut } = useContext(AuthContext)
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -40,25 +41,123 @@ function HeaderSidebar(props) {
     }
   };
 
+  const handleLogout = async () => {
+    await logOut();
+    navigate('/');
+  }
+
   const drawer = (
     <div className='bg-[#ede7e1] h-full'>
       <div className="bg-gray-800 h-screen">
         <div className="p-4">
-          <h1 className="text-white text-xl font-semibold">Sidenav</h1>
           <ul className="mt-4 ">
-            <NavLink exact to="/" activeClassName="bg-red-500">
-              <li className={`py-2 ${location.pathname === '/' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>Home</li>
-            </NavLink>
+            {
+              isAdmin?.admin ? (
+                <>
+                  <NavLink to="/dashboard">
+                    <li className={`py-2 ${location.pathname === '/' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>Home</li>
+                  </NavLink>
 
-            <NavLink exact to="/medic-guide" activeClassName="bg-red-500">
-              <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Medical Guidance</li>
-            </NavLink>
+                  <NavLink to="/dashboard/add-new-doc">
+                    <li className={`py-2 ${location.pathname === '/medicines' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Add new doctor</li>
+                  </NavLink>
 
-            <NavLink exact to="/chat-room" activeClassName="bg-red-500">
-              <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Chat Room</li>
-            </NavLink>
+
+                  <NavLink to="/dashboard/chat-room">
+                    <li className={`py-2 ${location.pathname === '/chat-room' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Arrange a meeting</li>
+                  </NavLink>
+
+
+                  <NavLink to="/dashboard/all-ambulance">
+                    <li className={`py-2 ${location.pathname === '/all-ambulance' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>All Ambulance</li>
+                  </NavLink>
+
+
+                  <NavLink to="/dashboard/add-new-ambulance">
+                    <li className={`py-2 ${location.pathname === '/add-new-ambulance' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Add new ambulance</li>
+                  </NavLink>
+
+
+                  <NavLink to="/dashboard/all-users">
+                    <li className={`py-2 ${location.pathname === '/all-users' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>All Users</li>
+                  </NavLink>
+
+                  <NavLink to="/dashboard/total-visits">
+                    <li className={`py-2 ${location.pathname === '/total-visits' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Total Visits</li>
+                  </NavLink>
+                  <NavLink to="/dashboard/medic-guide">
+                    <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Doctors</li>
+                  </NavLink>
+
+
+                  <NavLink to="/dashboard/my-requests">
+                    <li className={`py-2 ${location.pathname === '/my-requests' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>My Requests</li>
+                  </NavLink>
+
+                  <div className='border-2 border-gray-500 mt-6 mb-4'></div>
+
+                  <NavLink to="/dashboard/my-Bookings">
+                    <li className={`py-2 ${location.pathname === '/my-Bookings' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>My Bookings</li>
+                  </NavLink>
+                </>
+              ) : isAdmin?.doctor ? (
+                <>
+
+                  <NavLink to="/dashboard">
+                    <li className={`py-2 ${location.pathname === '/' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>Home</li>
+                  </NavLink>
+                  <NavLink to="/dashboard/requests">
+                    <li className={`py-2 ${location.pathname === '/requests' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Request</li>
+                  </NavLink>
+
+
+                  <NavLink to="/dashboard/medic-guide">
+                    <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Doctors</li>
+                  </NavLink>
+
+
+                  <NavLink to="/dashboard/my-requests">
+                    <li className={`py-2 ${location.pathname === '/my-requests' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>My Requests</li>
+                  </NavLink>
+
+                  <div className='border-2 border-gray-500 mt-6 mb-4'></div>
+
+                  <NavLink to="/dashboard/my-Bookings">
+                    <li className={`py-2 ${location.pathname === '/my-Bookings' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>My Bookings</li>
+                  </NavLink>
+                </>
+              ) : (
+                <>
+
+                  <NavLink to="/dashboard">
+                    <li className={`py-2 ${location.pathname === '/' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>Home</li>
+                  </NavLink>
+
+                  <NavLink to="/dashboard/medic-guide">
+                    <li className={`py-2 ${location.pathname === '/medic-guide' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>Doctors</li>
+                  </NavLink>
+
+
+                  <NavLink to="/dashboard/my-requests">
+                    <li className={`py-2 ${location.pathname === '/my-requests' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 hover:bg-red-900 py-2 w-full p-2 rounded-md mt-2`}>My Requests</li>
+                  </NavLink>
+
+                  <div className='border-2 border-gray-500 mt-6 mb-4'></div>
+
+                  <NavLink to="/dashboard/my-Bookings">
+                    <li className={`py-2 ${location.pathname === '/my-Bookings' ? 'bg-red-500' : ''} text-white bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2`}>My Bookings</li>
+                  </NavLink>
+
+                </>
+              )
+            }
+
+            <li onClick={handleLogout} className="text-white cursor-pointer bg-white bg-opacity-20 py-2 w-full p-2 rounded-md mt-2">Logout</li>
+
           </ul>
         </div>
+
+
       </div>
 
 
@@ -90,7 +189,7 @@ function HeaderSidebar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Ambulance Booking
           </Typography>
         </Toolbar>
       </AppBar>
@@ -133,6 +232,7 @@ function HeaderSidebar(props) {
       >
         <Toolbar />
         <Outlet></Outlet>
+        <Toaster></Toaster>
       </Box>
     </Box>
   );

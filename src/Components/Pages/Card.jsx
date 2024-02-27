@@ -43,7 +43,7 @@ const Card = ({ card }) => {
                 </div>
                 <div className="flex gap-4 items-center justify-center mt-2">
                     <button className='border border-blue-400 p-2 rounded-md'>Book</button>
-                    <Link to={`/see-detail/${_id}`}>
+                    <Link to={`/dashboard/see-detail/${_id}`}>
                         <button className='border border-blue-400 p-2 rounded-md'>See Detail</button>
                     </Link>
                 </div>
