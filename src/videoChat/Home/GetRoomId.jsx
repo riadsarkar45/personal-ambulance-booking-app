@@ -13,7 +13,7 @@ const GetRoomId = () => {
             toast.error('Please enter a room ID.');
             return;
         }
-        navigate(`/room/${value}`)
+        navigate(`/dashboard/room/${value}`)
     }, [navigate, value])
     return (
         <div className='bg-white bg-opacity-20 h-[80.25vh] flex flex-col justify-center items-center'>

@@ -45,7 +45,7 @@ const Req = ({ req, index, handleOpen, handleClose, open, meetLink, createUniqId
                         </div>
                         <div className='w-full mb-6 flex'>
                             <input value={meetLink} className='w-full p-2 border rounded-l-md' placeholder='Click create meeting link' readOnly />
-                            <button className='bg-blue-500 bg-opacity-20 p-2'>Copy</button>
+                            {/* <button className='bg-blue-500 bg-opacity-20 p-2'>Copy</button> */}
                         </div>
                         <div className='flex justify-between gap-2 '>
                             <button onClick={() => confirmRequest(requesterEmail, _id, requesterName)} className='bg-blue-500 bg-opacity-20 border-blue-500 p-2 border rounded-md w-full'>Confirm</button>

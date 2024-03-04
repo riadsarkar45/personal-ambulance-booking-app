@@ -14,7 +14,7 @@ const AllAmbulance = () => {
     const [type, setType] = useState('')
     const [index, setIndex] = useState('')
 
-    const {data:amb = [], refetch } = useQuery({
+    const { refetch } = useQuery({
         queryKey: ["data"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/all-users`);
@@ -65,6 +65,11 @@ const AllAmbulance = () => {
         }
         axiosSecure.patch('/api/update/ambulance', dataToUpdate).then(() => refetch(),toast.success("Changes Saved"),setIndex(false) )
     }
+
+    const handleDeleteAmbulance = (id) => {
+        const type = "ambulance"
+        axiosSecure.delete(`/api/delete/${id}/${type}`, {type}).then(() => refetch(), toast.success("Delete successfull"))
+    }
     return (
         <div>
             <div className="overflow-x-auto">
@@ -100,6 +105,7 @@ const AllAmbulance = () => {
                                     getHospitalName={getHospitalName}
                                     getType={getType}
                                     setIndex={setIndex}
+                                    handleDeleteAmbulance={handleDeleteAmbulance}
                                 />
                             )
                         }

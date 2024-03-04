@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import useAdmin from '../../Hooks/useAdmin';
 import { useContext } from 'react';
@@ -189,7 +189,7 @@ function HeaderSidebar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Ambulance Booking
+            <Link to="/"><h2 className='font-serif'>HealthCare</h2></Link>
           </Typography>
         </Toolbar>
       </AppBar>
