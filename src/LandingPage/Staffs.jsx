@@ -1,37 +1,42 @@
 
 const Staffs = () => {
     return (
-        <div className="mt-[5rem]">
-            <div>
-                <h2>Medical Staffs</h2>
+        <div className="mt-[5rem] text-black lg:w-[78%] m-auto">
+            <div className="mb-6">
+                <h2 className="text-4xl">Medical Staffs</h2>
             </div>
             <div className="lg:flex justify-between">
-                <div className="lg:flex gap-2">
+                <div className="bg-teal-500 bg-opacity-30 text-center p-2">
                     <div>
-                        <img className="lg:w-[20rem] w-full" src="https://i.ibb.co/RbGdYVb/image23-1200x1200.jpg" alt="" />
+                        <img className="lg:w-[15rem] w-full" src="https://i.ibb.co/RbGdYVb/image23-1200x1200.jpg" alt="" />
                     </div>
                     <div>
                         <h2 className="uppercase mt-2 mb-4 text-xl">Cardiac Surgeon</h2>
+                        <div className="border border-gray-2"></div>
                         <h2 className="mb-4">Dr . Charlie McChormick</h2>
-                        <p className="lg:w-[21rem]">
-                            Specialist is general and bariatric surgery,
-                            all minimally invasive methods.
-                            Senior general surgeon and head of bariatric surgery.
-                        </p>
+                        
                     </div>
                 </div>
-                <div className="lg:flex gap-2">
+                <div className="bg-teal-500 bg-opacity-30 text-center p-2">
                     <div>
-                        <img className="lg:w-[20rem] w-full" src="https://i.ibb.co/Hz3hPvv/image24-1200x1200.jpg" alt="" />
+                        <img className="lg:w-[15rem] w-full" src="https://i.ibb.co/RbGdYVb/image23-1200x1200.jpg" alt="" />
                     </div>
                     <div>
-                        <h2 className="uppercase mt-2 mb-4 text-2xl">Consulting Doctor</h2>
-                        <h2 className="mb-4">Dr. Bettie Powell</h2>
-                        <p className="lg:w-[21rem]">
-                            Specialist is general and bariatric surgery,
-                            all minimally invasive methods.
-                            Senior general surgeon and head of bariatric surgery.
-                        </p>
+                        <h2 className="uppercase mt-2 mb-4 text-xl">Cardiac Surgeon</h2>
+                        <div className="border border-gray-2"></div>
+                        <h2 className="mb-4">Dr . Charlie McChormick</h2>
+                        
+                    </div>
+                </div>
+                <div className="bg-teal-500 bg-opacity-30 text-center p-2">
+                    <div>
+                        <img className="lg:w-[15rem] w-full" src="https://i.ibb.co/RbGdYVb/image23-1200x1200.jpg" alt="" />
+                    </div>
+                    <div>
+                        <h2 className="uppercase mt-2 mb-4 text-xl">Cardiac Surgeon</h2>
+                        <div className="border border-gray-2"></div>
+                        <h2 className="mb-4">Dr . Charlie McChormick</h2>
+                        
                     </div>
                 </div>
             </div>

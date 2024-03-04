@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthProvider/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import UserRow from "./UserRow";
+import toast from "react-hot-toast";
 
 const AllUsers = () => {
     const { user } = useContext(AuthContext)
@@ -26,6 +27,11 @@ const AllUsers = () => {
 
     const handleGetOnchangeText = (email) => {
         setChangedText(email)
+    }
+
+    const handleDeleteUser = (id) => {
+        const type = "user"
+        axiosSecure.delete(`/api/delete/${id}/${type}`, { type }).then(() => refetch(), toast.success("Delete successfull"))
     }
     return (
         <div className="bg-white bg-opacity-20">
@@ -63,6 +69,7 @@ const AllUsers = () => {
                                     index={index}
                                     handleGetOnchangeText={handleGetOnchangeText}
                                     changedText={changedText}
+                                    handleDeleteUser={handleDeleteUser}
                                 />
                             )
                         }

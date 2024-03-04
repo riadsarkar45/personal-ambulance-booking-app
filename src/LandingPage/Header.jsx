@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Auth/AuthProvider/AuthProvider";
+import Headroom from "react-headroom";
 
 const Header = () => {
     const { user } = useContext(AuthContext)
     return (
         <div>
-            <>
-                <nav className="bg-white border-gray-200 dark:bg-gray-900">
+            <Headroom>
+                <nav className="bg-teal-500 border-b-red-200 border  bg-opacity-80">
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                         <a
                             href="https://flowbite.com"
@@ -47,7 +48,7 @@ const Header = () => {
                         </div>
                     </div>
                 </nav>
-            </>
+            </Headroom>
 
         </div>
     );

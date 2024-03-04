@@ -20,7 +20,7 @@ const Doctor = ({ doc, handleRequestDoctor, requesterEmails }) => {
                         <h2>{hospital}</h2>
                         <h2>{expertise}</h2>
                         {
-                            status === "Available" ? (
+                            status === "active" ? (
                                 <div className='flex justify-between gap-1' >
                                     <button className='bg-green-500 w-[8rem] text-center p-1 rounded-sm bg-opacity-35 border border-green-500'>Available</button>
                                 </div>

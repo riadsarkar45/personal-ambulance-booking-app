@@ -1,34 +1,23 @@
+import Header from "./Header";
 
 const Banner = () => {
     return (
-        <div>
-            <div className="carousel w-full">
-                <div id="slide1" className="carousel-item relative w-full">
-                    <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide4" className="btn btn-circle">❮</a>
-                        <a href="#slide2" className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-                <div id="slide2" className="carousel-item relative w-full">
-                    <img src="https://daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg" className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide1" className="btn btn-circle">❮</a>
-                        <a href="#slide3" className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-                <div id="slide3" className="carousel-item relative w-full">
-                    <img src="https://daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg" className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide2" className="btn btn-circle">❮</a>
-                        <a href="#slide4" className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-                <div id="slide4" className="carousel-item relative w-full">
-                    <img src="https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg" className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide3" className="btn btn-circle">❮</a>
-                        <a href="#slide1" className="btn btn-circle">❯</a>
+        <div style={{ backgroundImage: `url(https://i.ibb.co/pRKrZCy/bg-1.jpg)`, backgroundSize: 'cover', width: '100%' }}>
+            <Header></Header>
+            <div className="h-[25rem] flex items-center">
+                
+                <div className=" w-full text-white p-3 ">
+                    <h2 className="text-xl ">
+                        Entrust your health our doctors
+                    </h2>
+                    <p className="text-2xl">
+                        Medical services that
+                        you can trust
+                    </p>
+
+                    <div className="mt-4 flex gap-3">
+                        <button className="border border-white text-white p-2 rounded-sm">Make Appointment</button>
+                        <button className="border border-white text-white p-2 rounded-sm">Login</button>
                     </div>
                 </div>
             </div>

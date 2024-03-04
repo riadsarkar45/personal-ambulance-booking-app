@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import DangerStatus from './Shared/DangerStatus';
 
-const MyBooking = ({ booking, i }) => {
-    const { location, reason, date } = booking
+const MyBooking = ({ booking, i, handleDeleteBookings }) => {
+    const { location, reason, date, _id } = booking
     return (
         <div className='flex justify-between text-xl h-[4rem] text-white items-center p-2 rounded-md bg-white bg-opacity-20 mt-5'>
             <div className='flex gap-4  w-[25rem]'>
@@ -16,9 +16,8 @@ const MyBooking = ({ booking, i }) => {
 
             </div>
 
-            <div>
+            <div onClick={() => handleDeleteBookings(_id)}>
                 <DangerStatus text="Delete"></DangerStatus>
-
             </div>
         </div>
     );
@@ -27,6 +26,7 @@ const MyBooking = ({ booking, i }) => {
 MyBooking.propTypes = {
     booking: PropTypes.object,
     i: PropTypes.object,
+    handleDeleteBookings: PropTypes.func,
 };
 
 export default MyBooking;

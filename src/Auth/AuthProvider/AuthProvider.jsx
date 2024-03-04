@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from "../Firebase";
 import useAxiosPublic from "../../Hooks/BaseUrl/useAxiosPublic";
 
@@ -10,6 +10,15 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setLoading] = useState(true)
 
+    const createUser = (email, password) => {
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    const SignIn = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
+    }
     const provider = new GoogleAuthProvider()
     const googleSignIn = () => {
         setLoading(true)
@@ -19,6 +28,14 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signOut(auth)
     }
+
+    const updateUser = (name, imgUrl) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: imgUrl
+        })
+    }
+    
     useEffect(() => {
         const unsubsCribe = onAuthStateChanged(auth, (currentUser) => {
             console.log(currentUser)
@@ -46,7 +63,8 @@ const AuthProvider = ({ children }) => {
         }
 
     }, [axiosPublic])
-    const authInfo = { logOut, user, isLoading, googleSignIn };
+
+    const authInfo = { logOut, user, isLoading, googleSignIn, updateUser, createUser, SignIn };
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

@@ -1,6 +1,6 @@
 
-const UserRow = ({ rows, i, handleInlineEdit, index, handleGetOnchangeText, changedText }) => {
-    const { name, role, email } = rows;
+const UserRow = ({handleDeleteUser, rows, i, handleInlineEdit, index, handleGetOnchangeText, changedText }) => {
+    const { name, role, email, _id } = rows;
     return (
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">{i + 1}</td>
@@ -22,7 +22,7 @@ const UserRow = ({ rows, i, handleInlineEdit, index, handleGetOnchangeText, chan
                         </>
                     ) : (
                         <>
-                            <button className="bg-red-500 bg-opacity-20 border-red-500 border p-1 rounded-md">Delete</button> |
+                            <button onClick={() => handleDeleteUser(_id)} className="bg-red-500 bg-opacity-20 border-red-500 border p-1 rounded-md">Delete</button> |
                             <button className="bg-green-500 bg-opacity-20 border-green-500 border p-1 rounded-md">Approve</button>
                         </>
                     )

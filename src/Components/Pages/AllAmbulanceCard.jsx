@@ -1,5 +1,5 @@
 
-const AllAmbulanceCard = ({ getAmbulanceId, getDriverName, getLocation, getHospitalName, getType, rows, getIndexNumber, i, index, ambulanceId, hospitalName1, locations, types, handleUpdateAmbulance }) => {
+const AllAmbulanceCard = ({ handleDeleteAmbulance, getAmbulanceId, getDriverName, getLocation, getHospitalName, getType, rows, getIndexNumber, i, index, ambulanceId, hospitalName1, locations, types, handleUpdateAmbulance }) => {
     const { hospitalName, location, driverName, type, img, ambulanceNumber, _id } = rows
     return (
 
@@ -24,9 +24,9 @@ const AllAmbulanceCard = ({ getAmbulanceId, getDriverName, getLocation, getHospi
                 <td className="px-6 py-4 whitespace-nowrap">{driverName}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{type}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                    
-                    <button className="bg-red-500 bg-opacity-20 border-red-500 border p-1 rounded-md">Delete</button>
-                     </td>
+
+                    <button onClick={() => handleDeleteAmbulance(_id)} className="bg-red-500 bg-opacity-20 border-red-500 border p-1 rounded-md">Delete</button>
+                </td>
             </tr>
         )
 

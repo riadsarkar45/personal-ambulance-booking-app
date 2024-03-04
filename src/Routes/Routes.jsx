@@ -17,6 +17,7 @@ import AllAmbulance from "../Components/Pages/AllAmbulance"
 import AdminRoute from "../Hooks/AdminRoute"
 import PrivateRoute from "../Hooks/PrivateRoute"
 import Home from "../LandingPage/Home"
+import Registration from "../Components/Pages/Registration"
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login></Login>
+    },
+    {
+        path: "/register",
+        element: <Registration />
     }
 ])
 

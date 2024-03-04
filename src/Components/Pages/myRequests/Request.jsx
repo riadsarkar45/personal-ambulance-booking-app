@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Request = ({ myReq, i }) => {
-    const { requesterName, requesterEmail, requestToId, requestTo, status } = myReq;
+const Request = ({ myReq, i, handleDeleteReq }) => {
+    const { requesterName, requesterEmail, requestToId, requestTo, status, _id } = myReq;
     return (
         <div className='bg-white bg-opacity-20 rounded-sm text-white text-xl h-[3rem] flex items-center p-3 mt-2 justify-between'>
             <p className='w-[30rem] '>{i + 1}.{" "} {requesterName} requested to {requestTo}</p>
@@ -17,7 +17,7 @@ const Request = ({ myReq, i }) => {
 
 
             <div>
-                <button className='bg-red-500 bg-opacity-10 p-1 rounded-md border border-red-500 text-red-500' >Delete</button>
+                <button onClick={() => handleDeleteReq(_id)} className='bg-red-500 bg-opacity-10 p-1 rounded-md border border-red-500 text-red-500' >Delete</button>
             </div>
         </div>
     );

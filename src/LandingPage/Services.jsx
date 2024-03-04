@@ -1,47 +1,83 @@
-
+import AddToQueueIcon from '@mui/icons-material/AddToQueue';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
 const Services = () => {
     return (
-        <div>
-            <h2 className="text-4xl mt-6">Services</h2>
-            <div className="lg:flex mt-8">
-                <div className="mt-2">
-                    <img className="rounded-md shadow-md lg:w-[8rem] w-full mb-2" src="https://i.ibb.co/hyHLYrm/emergency-ambulance-on-white-background-free-vector.jpg" alt="" />
-
-                    <h2 className="text-xl">Immediate Ambulance Service </h2>
-                    <p>
-                        Your treatment plan is designed
-                        for steady progress,
-                        with every phase promptly implemented.
+        <div className="lg:w-[78%] lg:m-auto">
+            <div className="lg:flex md:flex mt-4">
+                <div className="bg-teal-500 lg:w-[25rem] w-full p-4 lg:h-[16rem] ">
+                    <h2 className="text-4xl">Top Doctors</h2>
+                    <p className="mt-9">
+                        Cum sociis natoque penatibus et magnis dis parturient
+                        montesmus. Pro vel nibh et elit mollis
+                        commodo et nec augue tristique sed volutpat.
                     </p>
                 </div>
-                <div className="mt-2">
-                <img className="rounded-md shadow-md lg:w-[8rem] w-full mb-2" src="https://i.ibb.co/hyHLYrm/emergency-ambulance-on-white-background-free-vector.jpg" alt="" />
-
-                    <h2 className="text-xl">Experienced Doctors</h2>
-                    <p>
-                        Your treatment plan is designed
-                        for steady progress,
-                        with every phase promptly implemented.
+                <div className="bg-teal-600 lg:w-[25rem] w-full p-4 lg:h-[16rem] ">
+                    <h2 className="text-4xl">24 Hours Service</h2>
+                    <p className="mt-9">
+                        Cum sociis natoque penatibus et magnis dis parturient
+                        montesmus. Pro vel nibh et elit mollis
+                        commodo et nec augue tristique sed volutpat.
                     </p>
                 </div>
-                <div className="mt-2">
-                <img className="rounded-md shadow-md  lg:w-[8rem] w-full mb-2" src="https://i.ibb.co/hyHLYrm/emergency-ambulance-on-white-background-free-vector.jpg" alt="" />
+                <div className="bg-teal-700 lg:w-[25rem] w-full p-4 lg:h-[16rem] ">
+                    <h2 className="text-4xl">Opening Hours</h2>
+                    <div className="mt-9">
+                        <div className="flex justify-between">
+                            <h2 className=" mb-2">Monday to Friday</h2>
+                            <div>
+                                <h2>8:00 - 17:00</h2>
+                            </div>
+                        </div>
+                        <div className="border border-teal-600"></div>
+                        <div className="flex justify-between mt-3">
+                            <h2 className=" mb-2">Monday to Friday</h2>
+                            <div>
+                                <h2>8:00 - 17:00</h2>
+                            </div>
+                        </div>
+                        <div className="border border-teal-600"></div>
 
-                    <h2 className="text-xl">Cutting Edge-Equipment</h2>
-                    <p>
-                        Your treatment plan is designed
-                        for steady progress,
-                        with every phase promptly implemented.
+                        <div className="flex justify-between mt-3">
+                            <h2 className=" mb-2">Monday to Friday</h2>
+                            <div>
+                                <h2>8:00 - 17:00</h2>
+                            </div>
+                        </div>
+                        <div className="border border-teal-600"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mt-9 text-black lg:flex gap-3">
+                <div>
+                    <h2 className='text-4xl text-center'>< VideoCallIcon /></h2>
+                    <h2 className='text-center text-2xl'>On Camera Conversation</h2>
+                    <p className='text-center'>
+                        Cum sociis natoque penatibus
+                        et magnis dis parturient montesmus.
+                        Pro vel nibh et elit mollis commodo
+                        et nec augueique
                     </p>
                 </div>
-                <div className="mt-2">
-                <img className="rounded-md shadow-md  lg:w-[8rem] w-full  mb-2" src="https://i.ibb.co/hyHLYrm/emergency-ambulance-on-white-background-free-vector.jpg" alt="" />
-
-                    <h2 className="text-xl">Personalized Treatment </h2>
-                    <p>
-                        Your treatment plan is designed
-                        for steady progress,
-                        with every phase promptly implemented.
+                <div>
+                    <h2 className='text-4xl text-center'>< AddToQueueIcon /></h2>
+                    <h2 className='text-center text-2xl'>24/7 Ambulance Service</h2>
+                    <p className='text-center'>
+                        Cum sociis natoque penatibus
+                        et magnis dis parturient montesmus.
+                        Pro vel nibh et elit mollis commodo
+                        et nec augueique
+                    </p>
+                </div>
+                <div>
+                    <h2 className='text-4xl text-center'>< AddToQueueIcon /></h2>
+                    <h2 className='text-center text-2xl'>24/7 Ambulance Service</h2>
+                    <p className='text-center'>
+                        Cum sociis natoque penatibus
+                        et magnis dis parturient montesmus.
+                        Pro vel nibh et elit mollis commodo
+                        et nec augueique
                     </p>
                 </div>
             </div>

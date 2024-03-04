@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Auth/AuthProvider/AuthProvider";
 
 const axiosSecure = axios.create({
-    baseURL: 'https://server-side-bice.vercel.app'
+    //baseURL: 'http://localhost:5000'
+     baseURL: 'https://server-side-bice.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate();
