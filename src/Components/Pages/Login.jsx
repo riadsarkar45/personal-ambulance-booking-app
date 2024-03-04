@@ -41,7 +41,7 @@ const Login = () => {
                         <div className="text-center mt-7 ">
                             <button className="bg-green-500 shadow-[red] w-[13rem] bg-opacity-20 border border-green-500 rounded-md p-2">Login</button>
                         </div>
-                        <p className="mt-3">Don't have an account please <Link className="text-blue-900" to="/register">Register</Link></p>
+                        <p className="mt-3">Don{'`'}t have an account please <Link className="text-blue-900" to="/register">Register</Link></p>
                     </div>
                 </form>
 
