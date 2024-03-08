@@ -72,10 +72,10 @@ const AllAmbulance = () => {
     }
     return (
         <div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto bg-gray-800 text-[#d9d8df]">
                 <table className="w-full whitespace-nowrap">
                     <thead>
-                        <tr className="bg-gray-50">
+                        <tr className="">
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ambulance ID</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hospital Name</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
@@ -85,7 +85,7 @@ const AllAmbulance = () => {
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className=" divide-y divide-gray-200">
                         {
                             ambulance?.map((rows, i) =>
                                 <AllAmbulanceCard key={i}

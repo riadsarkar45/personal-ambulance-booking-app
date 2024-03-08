@@ -39,7 +39,7 @@ const Req = ({ req, index, handleOpen, handleClose, open, meetLink, createUniqId
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <div className='flex justify-between w-full mb-4'>
+                        <div className='lg:flex justify-between w-full mb-4'>
                             <input onChange={e => (getDate(e.target.value))} className='p-2 border rounded-md' type="date" />
                             <input onChange={e => (getTime(e.target.value))} className='p-2 border rounded-md' type="time" />
                         </div>

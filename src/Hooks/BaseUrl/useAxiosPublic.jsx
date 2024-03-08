@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosPublic = axios.create({
     //baseURL: "http://localhost:5000",
-     baseURL: "https://server-side-bice.vercel.app",
+     baseURL: "https://helthcare.vercel.app",
   });
 const useAxiosPublic = () => {
     return axiosPublic;

@@ -48,7 +48,7 @@ const Doctors = () => {
                         </Box>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-4 mt-9">
+                    <div className="grid lg:grid-cols-4 grid-cols-1 w-full mt-9">
                         {
                             doctors?.result?.map((doc, i) => <Doctor requesterEmails={doctors?.requesterEmails} handleRequestDoctor={handleRequestDoctor} key={i} doc={doc}></Doctor>)
                         }

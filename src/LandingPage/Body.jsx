@@ -4,6 +4,7 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Faq from "./Faq";
+import ReviewSection from "./ReviewSection";
 const Body = () => {
     return (
         <div className=" p-2 bg-opacity-20 rounded-md text-white">
@@ -32,6 +33,7 @@ const Body = () => {
             </div>
             <Services></Services>
             <Staffs></Staffs>
+            <ReviewSection></ReviewSection>
             <Faq></Faq>
         </div>
     );

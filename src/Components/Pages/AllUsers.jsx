@@ -34,11 +34,11 @@ const AllUsers = () => {
         axiosSecure.delete(`/api/delete/${id}/${type}`, { type }).then(() => refetch(), toast.success("Delete successfull"))
     }
     return (
-        <div className="bg-white bg-opacity-20">
+        <div className="bg-[#d9d8] bg-opacity-20">
             <div className="overflow-x-auto">
                 <table className="w-full whitespace-nowrap">
                     <thead>
-                        <tr className="bg-gray-50">
+                        <tr className="bg-[#d9d8df]">
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 ID
                             </th>
@@ -59,7 +59,7 @@ const AllUsers = () => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-[#d9d8df] divide-y divide-gray-200">
                         {
                             users?.map((rows, i) =>
                                 <UserRow

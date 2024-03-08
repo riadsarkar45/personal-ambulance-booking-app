@@ -47,8 +47,8 @@ function HeaderSidebar(props) {
   }
 
   const drawer = (
-    <div className='bg-[#ede7e1] h-full'>
-      <div className="bg-gray-800 h-screen">
+    <div className='bg-[#ede7e1] '>
+      <div className="bg-gray-800 min-h-screen">
         <div className="p-4">
           <ul className="mt-4 ">
             {

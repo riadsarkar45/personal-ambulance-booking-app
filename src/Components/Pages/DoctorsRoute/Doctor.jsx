@@ -10,7 +10,7 @@ const Doctor = ({ doc, handleRequestDoctor, requesterEmails }) => {
     return (
         <div>
             <Link>
-                <div className="bg-white text-white bg-opacity-20 h-[22rem] rounded-sm w-[15rem] mt-2 p-2">
+                <div className="bg-white text-white bg-opacity-20 h-[22rem] rounded-sm lg:w-[15rem] w-full mt-2 p-2">
                     <div className="bg-blue-500 bg-opacity-10 h-[10rem] p-2">
                         <img className='w-full h-full' src={image} alt="" />
                     </div>
